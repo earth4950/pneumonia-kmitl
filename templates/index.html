@@ -1,0 +1,73 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Classification for Pneumonia using Clinical and Imaging Data (Co-research with Rama Hospital)</title>
+  <meta name="description" content="X-ray App - Pneumonia x-ray analysis.">
+  <meta name="author" content="Sibel Tanoglu">
+  <link rel="stylesheet" type= "text/css" href="/static/styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div id="nav-container">
+  <h3 id="app-name">ระบบช่วยการวินิจฉัยโรคปอดอักเสบ</h3>
+</div>
+
+<div id="welcome-text" class="{{welcome_text_container_css}}">
+  <p>Classification for Pneumonia using Clinical and Imaging Data (Co-research with Rama Hospital)</p>
+    <p id='invalid-image-text' class="bad">{{invalid_image_error_text}}</p>
+</div>
+
+<div id="result-text" class="{{result_text_container_css}}">
+  <p class="result-text-line-1 {{result_text_line_1_css}}">{{result_text_line_1}}</p>
+    <p class="result-text-line-2 {{result_text_line_2_css}}">{{result_text_line_2}}</p>
+      <p class="result-text-line-3 {{result_text_line_3_css}}">{{result_text_line_3}}</p>
+</div>
+
+<div class="form-result-container {{top_margin_css}}">
+  <form id="upload-form" method="post" action="upload" enctype="multipart/form-data">
+        <label for="imageUpload" class="upload-label">
+            เลือกภาพ CT Scan เพื่อทำการวินิจฉัยโรคปอดอักเสบ:
+        </label>
+
+        <input type="file" name="image" id="image-upload" accept=".png, .jpg, .jpeg">
+        <div id="analyze-button-container">
+            <button id="analyze-button">Analyze</button>
+        </div>
+    </form>
+
+
+
+  <!-- <script src="js/scripts.js"></script> -->
+  <script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('#image-preview').attr('src', e.target.result);
+        $('#image-preview').removeClass("low-opacity");
+        $('#result-text').removeClass("visible");
+        $('#welcome-text').removeClass("hidden");
+        $('#welcome-text').addClass("visible");
+        $('#image-preview-overlay').addClass("hidden");
+        $("#invalid-image-text").empty();
+
+
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+    $("#image-upload").change(function() {
+      readURL(this);
+    });
+  </script>
+</body>
+</html>
+
+    
